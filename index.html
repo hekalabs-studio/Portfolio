@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Novemas Heka — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="STYLE/style.css" />
+</head>
+<body>
+  <div id="progress-bar"></div>
+  <!-- NAV -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <button id="btn-menu" class="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="brand">HEKA</div>
+      <nav id="main-nav" class="nav">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#resume" class="nav-link">Resume</a>
+        <a href="#certificates" class="nav-link">Certificates</a>
+        <a href="#portfolio" class="nav-link">Portfolio</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <!-- <button id="dark-mode-toggle">🌙</button> -->
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- HERO / HOME -->
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h4 class="hi">Hey There</h4>
+          <h1 class="name" id="typing-name">i'm Novemas Heka Alfarizi.</h1>
+          <p class="role">UI/UX Design • Web Development • Video Editing</p>
+          <p class="desc">
+            Saya Novemas Heka Alfarizi, umur 17 tahun. Saya sangat menyukai teknologi dan ingin mengikuti
+            perkembangan di dunia ini. Oleh sebab itu saya punya hobi coding dan editing yang ingin saya kembangkan
+            untuk mencari uang maupun pekerjaan.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#portfolio">Lihat Portfolio</a>
+            <a class="btn btn-outline" href="#contact">Kontak</a>
+          </div>
+
+          <div class="socials">
+            <p>Follow My Social Media</p>
+            <div class="icons">
+              <a href="#" class="social-link" data-platform="YouTube">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+              <a href="#" class="social-link" data-platform="Instagram">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.017 0C8.396 0 7.996.014 6.8.067 5.607.12 4.694.298 3.94.652c-.82.39-1.515.974-2.093 1.75C1.07 3.178.89 4.09.712 5.283c-.053 1.196-.067 1.596-.067 5.217s.014 4.021.067 5.217c.178 1.193.358 2.105.626 2.859.578.776 1.272 1.36 2.093 1.75.754.354 1.667.532 2.86.585 1.196.053 1.596.067 5.217.067s4.021-.014 5.217-.067c1.193-.053 2.105-.231 2.859-.585.776-.39 1.36-.974 1.75-1.75.268-.754.446-1.666.624-2.859.053-1.196.067-1.596.067-5.217s-.014-4.021-.067-5.217c-.178-1.193-.356-2.105-.624-2.859-.39-.776-.974-1.36-1.75-1.75-.754-.354-1.667-.532-2.859-.585C16.021.014 15.621 0 12.017 0zm0 2.163c3.574 0 3.997.014 5.406.078 1.303.058 2.025.276 2.51.46.63.238 1.08.526 1.55.996.47.47.758.92.996 1.55.184.485.402 1.207.46 2.51.064 1.409.078 1.832.078 5.406s-.014 3.997-.078 5.406c-.058 1.303-.276 2.025-.46 2.51-.238.63-.526 1.08-.996 1.55-.47.47-.92.758-1.55.996-.485.184-1.207.402-2.51.46-1.409.064-1.832.078-5.406.078s-3.997-.014-5.406-.078c-1.303-.058-2.025-.276-2.51-.46-.63-.238-1.08-.526-1.55-.996-.47-.47-.758-.92-.996-1.55-.184-.485-.402-1.207-.46-2.51-.064-1.409-.078-1.832-.078-5.406s.014-3.997.078-5.406c.058-1.303.276-2.025.46-2.51.238-.63.526-1.08.996-1.55.47-.47.92-.758 1.55-.996.485-.184 1.207-.402 2.51-.46 1.409-.064 1.832-.078 5.406-.078zm0 3.781a6.232 6.232 0 1 0 0 12.464 6.232 6.232 0 0 0 0-12.464zm0 2.163c3.407 0 6.069 2.662 6.069 6.069s-2.662 6.069-6.069 6.069-6.069-2.662-6.069-6.069 2.662-6.069 6.069-6.069zm7.793-1.85a1.45 1.45 0 1 1-2.9 0 1.45 1.45 0 0 1 2.9 0z"/>
+                </svg>
+              </a>
+              <a href="#" class="social-link" data-platform="Twitter">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="profile-card">
+            <div class="profile-photo">
+              <!-- Ganti path foto profil di bawah sesuai filemu -->
+              <img src="IMG/profile.png" alt="Novemas Heka" />
+            </div>
+            <div class="profile-badge">17 • Web Dev • Editor</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section about">
+      <div class="container section-grid">
+        <div class="side">
+          <img class="round-photo" src="IMG/profile.png" alt="Novemas Heka" />
+        </div>
+        <div class="content">
+          <h2>About Me</h2>
+          <p class="lead"><strong>Saya Novemas Heka Alfarizi</strong>, saya suka teknologi dan belajar hal baru, terutama coding dan editing.</p>
+          <p>
+            (Tambahkan detail lain di sini nanti — pendidikan singkat, minat, tujuan karier, dsb.)
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="num">+3</div>
+              <div class="label">Projects</div>
+            </div>
+            <div class="stat">
+              <div class="num">17</div>
+              <div class="label">Age</div>
+            </div>
+            <div class="stat">
+              <div class="num">+0</div>
+              <div class="label">Clients</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume" class="section resume">
+      <div class="container">
+        <h2>Resume</h2>
+        <div class="resume-grid">
+          <div class="card">
+            <h3>Pendidikan</h3>
+            <p>SMA — (Isi nanti)</p>
+          </div>
+          <div class="card">
+            <h3>Pengalaman</h3>
+            <p>Proyek pribadi: website, video editing, dsb. (Isi nanti)</p>
+          </div>
+          <div class="card">
+            <h3>Skills</h3>
+            <ul class="skills">
+              <li>HTML &amp; CSS</li>
+              <li>JavaScript</li>
+              <li>Figma / UI Design</li>
+              <li>Video Editing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates" class="section certificates">
+      <div class="container">
+        <h2>Certificates</h2>
+        <div class="certificates-container">
+          <div class="certificate-category">
+            <h3>Coding Certificates</h3>
+            <div class="certificate-grid">
+              <!-- Ganti src dengan path gambar sertifikat coding Anda -->
+              <div class="certificate-item">
+                <img src="IMG/certificateCoding/sertifikatCodeorg.jpg" alt="Coding Certificate 1" class="certificate-img"/>
+                <p>Certificate Title 1</p>
+              </div>
+              <div class="certificate-item">
+                <img src="IMG/certificateCoding/sertifikatLatika.svg" alt="Coding Certificate 2" class="certificate-img"/>
+                <p>Certificate Title 2</p>
+              </div>
+            </div>
+          </div>
+          <div class="certificate-category">
+            <h3>Other Certificates</h3>
+            <div class="certificate-grid">
+              <!-- Ganti src dengan path gambar sertifikat lainnya Anda -->
+              <div class="certificate-item">
+                <img src="IMG/moreCertificate/PiagamWebinarPeringatanDiniBencana.svg" alt="Other Certificate 1" class="certificate-img"/>
+                <p>Certificate Title 1</p>
+              </div>
+              <div class="certificate-item">
+                <img src="IMG/moreCertificate/Sertifikat_antiperundungan.svg" alt="Other Certificate 2" class="certificate-img"/>
+                <p>Certificate Title 2</p>
+              </div>
+              <div class="certificate-item">
+                <img src="IMG/moreCertificate/sertifikatOlimIPS.svg" alt="Other Certificate 3" class="certificate-img"/>
+                <p>Certificate Title 3</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="section portfolio">
+      <div class="container">
+        <h2>Portfolio</h2>
+        <div class="portfolio-grid">
+          <!-- Isi thumbnail project, ganti src dengan screenshot karyamu -->
+          <div class="portfolio-item"><img src="IMG/portfolio1.png" alt="Project 1" /><p>Project 1</p></div>
+          <div class="portfolio-item"><img src="IMG/portfolio2.png" alt="Project 2" /><p>Project 2</p></div>
+          <div class="portfolio-item"><img src="IMG/portfolio3.png" alt="Project 3" /><p>Project 3</p></div>
+          <div class="portfolio-item"><img src="IMG/portfolio4.png" alt="Project 4" /><p>Project 4</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="section testimonials">
+      <div class="container">
+        <h2>Testimonials</h2>
+        <div class="test-grid">
+          <div class="test-card">"Kamu bisa isi testimonial di sini nanti."</div>
+          <div class="test-card">"Kosong dulu atau hapus kalau belum ada."</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <h2>Get In Touch</h2>
+          <p>I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology and design. Feel free to reach out!</p>
+
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="contact-icon">📧</div>
+              <div class="contact-details">
+                <h4>Email</h4>
+                <a href="mailto:hekoding@gmail.com">hekoding@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-icon">📱</div>
+              <div class="contact-details">
+                <h4>Phone</h4>
+                <a href="tel:+6289514433486">+62 895-1443-3486</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-icon">📸</div>
+              <div class="contact-details">
+                <h4>Instagram</h4>
+                <a href="https://www.instagram.com/novemash3kaa?igsh=MW1nMHVlb3c2OWpkbQ==" target="_blank">@novemash3kaa</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-icon">📍</div>
+              <div class="contact-details">
+                <h4>Location</h4>
+                <span>Indonesia</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-availability">
+            <h4>Response Time</h4>
+            <p>Usually respond within 24 hours</p>
+          </div>
+        </div>
+
+        <form class="contact-form" onsubmit="return false;" method="POST" action="https://script.google.com/macros/s/AKfycbxnpOQkHNDK2tNA4pIA7OVjPc8ei5dXXRMnISKpMx66X6OAkxFKMj9xYwiZosqloNkx/exec">
+          <div class="form-header">
+            <h3>Send Message</h3>
+            <p>Fill out the form below and I'll get back to you soon.</p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input id="name" type="text" placeholder="Your full name" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input id="email" type="email" placeholder="your.email@example.com" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input id="subject" type="text" placeholder="What's this about?" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" rows="6" placeholder="Tell me about your project or just say hello..." required></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" id="send-btn" type="submit">
+              <span class="btn-text">Send Message</span>
+              <span class="btn-loading" style="display: none;">Sending...</span>
+            </button>
+          </div>
+
+          <div id="form-message" class="form-message"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo">HEKA</div>
+          <p class="footer-tagline">UI/UX Design • Web Development • Video Editing</p>
+          <p class="footer-description">Passionate about creating digital experiences that make a difference.</p>
+        </div>
+
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-social">
+          <h4>Follow Me</h4>
+          <div class="social-links">
+            <a href="https://www.instagram.com/novemash3kaa?igsh=MW1nMHVlb3c2OWpkbQ==" target="_blank" class="social-link instagram">
+              <span class="social-text">Instagram 📸</span>
+            </a>
+            <a href="mailto:hekoding@gmail.com" class="social-link email">
+              <span class="social-text">Email 📧</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <p>© <span id="year"></span> Novemas Heka. All rights reserved.</p>
+        </div>
+        <div class="footer-attribution">
+          <p>Built using HTML, CSS & JavaScript</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="JS/script.js"></script>
+</body>
+</html>
