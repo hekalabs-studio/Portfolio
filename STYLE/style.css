@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "jetbrains";
+  src: url(../font/JetBrainsMonoNL-Regular.ttf);
+}
+@font-face {
+  font-family: "jetbrainsBold";
+  src: url(../font/JetBrainsMono-Bold.ttf);
+}
+@font-face {
+  font-family: "lato";
+  src: url(../font/Lato-Regular.ttf);
+}
 :root{
   --bg: #ffffff;
   --primary: #0e6ef5; /* biru utama */
@@ -406,11 +418,20 @@ body{
   z-index: 1;
 }
 
-.section-grid{display:flex; gap:28px; align-items:center; flex-wrap:wrap;}
-.section-grid .side{flex: 0 0 200px;}
+.section-grid{
+  display:flex; gap:28px; align-items:center; flex-wrap:wrap;
+}
+.section-grid .side{
+  flex: 0 0 200px;
+  text-align:center;
+}
 .section-grid .content{flex: 1; min-width: 0;}
 .round-photo{width:160px;height:160px;border-radius:12px;object-fit:cover;box-shadow:var(--shadow);border:6px solid white; transition: all 0.3s ease;}
 .round-photo:hover{transform: scale(1.05); box-shadow: 0 15px 35px rgba(11,43,74,0.2);}
+
+/* ABOUT list */
+.about-list{margin:14px 0 8px 0;padding-left:18px;color:var(--muted);line-height:1.6}
+.about-list li{margin-bottom:6px}
 
 /* STATS */
 .stats{display:flex;gap:18px;margin-top:18px}
@@ -529,8 +550,6 @@ body{
 }
 
 .portfolio-item img {
-  width: 100%;
-  height: 140px;
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 12px;
@@ -1387,7 +1406,10 @@ body{
   .hero-left .desc{max-width:100%}
   .profile-photo img{width:200px;height:200px}
   .round-photo{width:140px;height:140px}
-  .section-grid .side{flex: 0 0 140px;}
+  .section-grid .side{
+    flex: 0 0 140px;
+    width: 80%;
+  }
   .stats{flex-direction:column; gap:12px;}
   .stat{min-width: auto; width:100%;}
   .contact-form{padding:20px;}
