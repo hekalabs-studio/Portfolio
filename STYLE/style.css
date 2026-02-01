@@ -426,7 +426,16 @@ body{
   text-align:center;
 }
 .section-grid .content{flex: 1; min-width: 0;}
-.round-photo{width:160px;height:160px;border-radius:12px;object-fit:cover;box-shadow:var(--shadow);border:6px solid white; transition: all 0.3s ease;}
+.round-photo{
+  width:160px;
+  height:160px;
+  border-radius:12px;
+  object-fit:cover;
+  box-shadow:var(--shadow);
+  border:6px solid white;
+  transition: all 0.3s ease;
+  transform: scale(1.4);
+}
 .round-photo:hover{transform: scale(1.05); box-shadow: 0 15px 35px rgba(11,43,74,0.2);}
 
 /* ABOUT list */
@@ -691,16 +700,18 @@ body{
 }
 
 .contact-grid {
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr 500px;
   gap: 60px;
-  align-items: start;
+  align-items: center;
   position: relative;
+  justify-content: center;
   z-index: 1;
 }
 
 .contact-info {
   padding: 40px 0;
+
 }
 
 .contact-info p {
