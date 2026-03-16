@@ -1,0 +1,82 @@
+.portfolio-grid {
+  overflow-x: auto;
+  display: flex;
+  overflow-y: hidden;
+  gap: 10px;
+  padding-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  border-radius: 20px;
+  width: 100%;
+
+}
+
+.portfolio-item {
+  flex: 0 0 200px;
+  scroll-snap-align: start;
+  margin-top: 30px;
+  margin-left: 10px;
+  
+}
+.container{width: calc(100% - 32px); padding: 24px 0;}
+  .hero{padding: 40px 0 20px; min-height: auto;}
+  .section{padding: 32px 0;}
+  .hero-left .name{font-size:1.8rem; white-space: normal; word-wrap: break-word;}
+  .hero-left .desc{max-width:100%}
+  .profile-photo img{width:200px;height:200px}
+  .round-photo{width:140px;height:140px}
+  .section-grid .side{
+    flex: 0 0 140px;
+    width: 80%;
+  }
+  .stats{flex-direction:column; gap:12px;}
+  .stat{min-width: auto; width:100%;}
+  .contact-form{padding:20px;}
+  .contact-info p{font-size:1rem;}
+  .portfolio-item img{height:120px;}
+  .certificate-grid{
+
+  display: flex;
+  flex-direction: column;  
+  }
+
+  .contaie
+
+  /* FOOTER RESPONSIVE */
+  .site-footer {
+    padding: 40px 0 30px;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .footer-brand {
+    text-align: center;
+  }
+  
+  .footer-links, .footer-social {
+    text-align: center;
+  }
+  
+  .footer-links h4::after, .footer-social h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .footer-links a:hover {
+    transform: none;
+  }
+  
+  .social-link:hover {
+    transform: none;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    padding-top: 20px;
+  }
+
