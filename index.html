@@ -7,9 +7,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="STYLE/style.css" />
+  <link rel="stylesheet" href="style/style.css" />
   <link rel="shortcut icon" href="IMG/myPhoto/user.png">
-  <link rel="stylesheet" href="STYLE/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="style/mobile.css" media="screen and (max-width: 768px)">
+
+    <!-- Atribut OG untuk Gambar -->
+    <meta property="og:image" content="URL_GAMBAR_ANDA.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:title" content="Judul Link Anda">
+    <meta property="og:description" content="Deskripsi singkat link Anda.">
+
+
 </head>
 <body>
   <div id="progress-bar"></div>
@@ -96,7 +105,7 @@
           <div class="profile-card">
             <div class="profile-photo">
               <!-- Ganti path foto profil di bawah sesuai filemu -->
-              <img src="IMG/myPhoto/profile.jpeg" alt="Novemas Heka" />
+              <img src="IMG/myPhoto/profile3.webp" alt="Novemas Heka" width="200" height="200"/>
             </div>
             <div class="profile-badge">17 • Web Dev • Editor</div>
           </div>
@@ -109,7 +118,7 @@
       <div class="container section-grid">
           <figure class="side">
             <div class="round-photo">
-              <img src="IMG/myPhoto/profile3.webp" alt="Foto Novemas Heka" width="200" height="200"/>
+              <img src="IMG/myPhoto/profile2.jpg" alt="Foto Novemas Heka" />
             </div>
             
             <figcaption style="font-size: small;font-weight: bold;">Hekoding</figcaption>
@@ -183,6 +192,10 @@
     </section>
 
     <!-- CERTIFICATES -->
+     <div id="showCertificates" onclick="certificate('0')">
+      
+        
+     </div>
     <section id="certificates" class="section certificates">
       <div class="container">
         <h2>Certificates</h2>
@@ -196,12 +209,18 @@
                 <img src="IMG/certificateCoding/sertifikatCodeorg.jpg" alt="Coding Certificate 1" class="certificate-img"/>
                 <p>Code.org - Course A</p>
               </div>
+
               <div class="certificate-item" onclick="certificate('2')">
                 <img src="IMG/certificateCoding/sertifikatLatika.svg" alt="Coding Certificate 2" class="certificate-img"/>
                 <p>Pelatihan TIK <br> <span style="font-size: small;">(HTML,CSS,JS & PYTHON)</span></p>
               </div>
-            </div>
 
+              <div class="certificate-item" onclick="certificate('3')">
+                <img src="IMG/certificateCoding/BRONZE PRIZE.jpg" alt="Coding Certificate 3" class="certificate-img"/>
+                <p>Surabaya Robotik & Drone Fiesta 2026</p>
+              </div>
+
+            </div>
           </div>
           <!-- <div class="certificate-category">
             <h3>Other Certificates</h3>
@@ -232,10 +251,12 @@
 
         <div class="portfolio-grid">
           <!-- Isi thumbnail project, ganti src dengan screenshot karyamu -->
-          <div class="portfolio-item"><a href="https://hekaastore.netlify.app/" target="_blank" style="color: black; text-decoration: none;"><img src="IMG/project/logotoko.png" width="128" height="128" alt="Project 1" /><p>HekaStore</p></a></div>
-          <div class="portfolio-item"><a href="https://hekalabs-easycount.netlify.app/" target="_blank" style="color: black; text-decoration: none;"><img src="IMG/project/cat-logo.png" width="128" height="128" alt="Project 2" /><p>EasyCounting</p></a></div>
+          <div class="portfolio-item"><a href="https://hekaastore.netlify.app/" target="_blank" style="color: black; text-decoration: none;"><img src="IMG/project/logotoko.png" width="128" height="128" alt="Project 1" /><p>HekaStore - Website</p></a></div>
+          <div class="portfolio-item"><a href="https://hekalabs-easycount.netlify.app/" target="_blank" style="color: black; text-decoration: none;"><img src="IMG/project/cat-logo.png" width="128" height="128" alt="Project 2" /><p>EasyCounting - Website</p></a></div>
           <div class="portfolio-item"><a href="https://github.com/hekalabs-studio/myPython.git" target="_blank" style="color: black; text-decoration: none;"><img src="IMG/project/python logo.png" width="128" height="128" alt="Project 3" /><p>EasyCounting - Python</p></a></div>
-          <div class="portfolio-item"><a href="https://www.instagram.com/hekaedit?igsh=MWkyZ3lrcjR3OHdyOA==" target="_blank" style="color: black; text-decoration: none;"><img src="IMG/project/hekaedit.jpeg" width="128" height="128" alt="Project 4" /><p>Davinci Resolve 20 - Video</p></a></div>
+          <div class="portfolio-item"><a href="https://www.instagram.com/hekaedit?igsh=MWkyZ3lrcjR3OHdyOA==" target="_blank" style="color: black; text-decoration: none;"><img src="IMG/project/arduinoIDE.png" width="128" height="128" alt="Project 4" /><p>Robotik & IoT</p></a></div>
+          <div class="portfolio-item"><a href="https://www.instagram.com/hekaedit?igsh=MWkyZ3lrcjR3OHdyOA==" target="_blank" style="color: black; text-decoration: none;"><img src="IMG/project/DaVinci_Resolve_Studio.png" width="128" height="128" alt="Project 4" /><p>Davinci Resolve 20 - Video</p></a></div>
+          
         </div>
 
       </div>
@@ -371,6 +392,9 @@
     </div>
   </footer>
 
-  <script src="JS/script.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    
+  </script>
 </body>
 </html>

@@ -1,7 +1,8 @@
 // Toggle mobile menu
 const btnMenu = document.getElementById('btn-menu');
 const nav = document.getElementById('main-nav');
-
+const showCertificates = document.getElementById("showCertificates");
+showCertificates.style.display = "none";
 btnMenu.addEventListener('click', () => {
   nav.classList.toggle('open');
   btnMenu.classList.toggle('active');
@@ -131,12 +132,36 @@ if(localStorage.getItem('darkMode') === 'enabled'){
   darkModeToggle.textContent = '☀️';
 }
 
-const sertifikat = document.getElementsByClassName('certificate-item');
-for(let i = 0; i < sertifikat.length; i++){
-  sertifikat[i].addEventListener('click', function(){
-    const linkSertifikat = document.getElementsByClassName('certificate-img');
-    for(let  j = 0; j < linkSertifikat.length; j++){
-      linkSertifikat[j].style.display = 'none';
+
+function certificate(i) {
+  const sertifikat = document.querySelectorAll(".certificate-item");
+  const certificateImage = document.createElement("div");
+  showCertificates.innerHTML = '';
+    switch(i) {
+      case '1':
+        showCertificates.style.display = "flex";
+        certificateImage.classList.add("showImages");
+        certificateImage.innerHTML = `<img src="IMG/certificateCoding/sertifikatCodeorg.jpg" alt="" height="300" width="400"/>`
+        showCertificates.appendChild(certificateImage);
+        break;
+      case '2':
+        showCertificates.style.display = "flex";
+        certificateImage.classList.add("showImages");
+        certificateImage.innerHTML = `<img src="IMG/certificateCoding/sertifikatLatika.svg" alt="" height="300" width="400"/>`
+        showCertificates.appendChild(certificateImage);
+        break;
+      case '3':
+        
+        showCertificates.style.display = "flex";
+        certificateImage.classList.add("showImages");
+        certificateImage.innerHTML = `<img src="IMG/certificateCoding/BRONZE PRIZE.jpg" alt="" height="300" width="400"/>`
+        showCertificates.appendChild(certificateImage);
+        break;
+
+      default:
+        showCertificates.style.display = "none";
+        showCertificates.removeChild(certificateImage);
+        break;
     }
-  });
 }
+
