@@ -741,7 +741,6 @@ body{
 }
 .photo > img:hover {
   transform: translateY(-10px);
-  
 }
 /* CONTACT */
 .contact {
