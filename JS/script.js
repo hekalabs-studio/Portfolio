@@ -141,20 +141,23 @@ function certificate(i) {
       case '1':
         showCertificates.style.display = "flex";
         certificateImage.classList.add("showImages");
-        certificateImage.innerHTML = `<img src="IMG/certificateCoding/sertifikatCodeorg.jpg" alt="" />`
+        certificateImage.innerHTML = `<img src="img/certificateCoding/CourseACodeorg.webp" alt="" height="720" width="1280" />`
         showCertificates.appendChild(certificateImage);
         break;
       case '2':
         showCertificates.style.display = "flex";
         certificateImage.classList.add("showImages");
-        certificateImage.innerHTML = `<img src="IMG/certificateCoding/sertifikatLatika.svg" alt="" />`
+        certificateImage.innerHTML = `<img src="img/certificateCoding/PelatihanLatika.webp" alt=""  height="720" width="1280" />`
         showCertificates.appendChild(certificateImage);
         break;
       case '3':
         
         showCertificates.style.display = "flex";
         certificateImage.classList.add("showImages");
-        certificateImage.innerHTML = `<img src="IMG/certificateCoding/BRONZE PRIZE.jpg" alt="" />`
+        certificateImage.innerHTML = `
+        <img src="img/certificateCoding/CodingMission.webp" alt=""  height="540" width="720"/>
+        <img src="img/certificateCoding/CodingMission_Prize.webp" alt="" height="540" width="720" />
+        `
         showCertificates.appendChild(certificateImage);
         break;
 

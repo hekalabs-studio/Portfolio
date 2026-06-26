@@ -523,10 +523,9 @@ body{
 }
 .showImages {
   position: relative;
-}
-.showImages > img {
-  width: 1024px;
-  height: 720px;
+  display: flex;
+  justify-content: center;
+
 }
 #showCertificates::before {
   content: '';
