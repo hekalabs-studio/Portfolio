@@ -1,56 +1,38 @@
-@keyframes slide {
-  from{
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
 .portfolio-grid {
-  overflow-x: auto;
-  display: flex;
-  overflow-y: hidden;
-  gap: 10px;
-  padding-bottom: 16px;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  border-radius: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
   width: 100%;
-
 }
 .container > p {
   font-size: 14px;
 }
 .portfolio-item {
-  flex: 0 0 200px;
-  scroll-snap-align: start;
-  margin-top: 30px;
-  margin: 0 10px;
-  
+  margin: 0;
 }
 
 .certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 240px));
+  justify-content: center;
+  gap: 14px;
   width: 100%;
-  overflow-x: auto;
-  display: flex;
-  overflow-y: hidden;
-  gap: 15px;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  flex-wrap: nowrap;
-  padding-bottom: 15px;
 }
 .certificate-item {
-  flex: 0 0 200px;
-  max-width: 200px;
+  max-width: 240px;
 }
 .certificate-item > img {
-  width: 80%;
+  width: 100%;
   height: 100px;
 
 }
 .certificate-item > p {
   font-size: small;
+}
+
+.gallery-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 14px;
 }
 
 .container{width: calc(100% - 32px); padding: 24px 0;}
@@ -69,61 +51,13 @@
   .contact-form{padding:20px;}
   .contact-info p{font-size:1rem;}
   .portfolio-item img{height:120px;}
-  .certificate-grid{
-  display: flex;
-  flex-direction: row;
+.close-lightbox {
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  font-size: 1.4rem;
 }
-#showCertificates {
-  position: fixed;
-  z-index: 99;
-  height: 100vh;
-  width: 100%;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.showImages {
-  position: relative;
-  max-width: 480px;
-  height: 320px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-}
-.showImages > img {
-  width: 95%;
-  height: 250px;
-}
-#showCertificates::before {
-  content: '';
-  position: absolute;
-  background-color: black;
-  opacity: 50%;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-}
-.aktifitas {
-  overflow-x: hidden;
-  display: flex;
-}
-.photo {
-  display: flex;
-  gap: 20px;
-  padding-left: 20px;
-  animation: slide linear 20s infinite;
-  
-}
-.photo > img {
-  height: 250px;
-  object-fit: cover;
-}
-
-
   /* FOOTER RESPONSIVE */
   .site-footer {
     padding: 40px 0 30px;
@@ -161,4 +95,14 @@
     text-align: center;
     padding-top: 20px;
   }
+
+@media (max-width: 480px) {
+  .portfolio-grid,
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .certificate-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+  }
+}
 

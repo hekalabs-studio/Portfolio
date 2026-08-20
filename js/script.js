@@ -53,10 +53,55 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-document.querySelectorAll('.section, .hero-left, .hero-right, .portfolio-item, .card, .test-card, .contact-form').forEach(el => {
+document.querySelectorAll('.section, .hero-left, .hero-right, .portfolio-item, .certificate-item, .gallery-item, .card, .test-card, .contact-form').forEach(el => {
   observer.observe(el);
 });
 
+
+// Show only the first 3 items in each certificate/portfolio/gallery grid,
+// with a "Show More" button to reveal the rest.
+function initRevealGrids(selector, limit = 3) {
+  document.querySelectorAll(selector).forEach((grid) => {
+    // Skip if this grid was already initialized (e.g. observer re-run)
+    if (grid.dataset.revealInit === 'true') return;
+
+    const items = Array.from(grid.children);
+    if (items.length <= limit) return; // nothing to hide, keep as-is
+
+    grid.dataset.revealInit = 'true';
+
+    items.forEach((item, i) => {
+      if (i >= limit) item.classList.add('grid-hidden');
+    });
+
+    const wrap = document.createElement('div');
+    wrap.className = 'show-more-wrap';
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'show-more-btn';
+    const hiddenCount = items.length - limit;
+    btn.textContent = `Show More (${hiddenCount})`;
+
+    btn.addEventListener('click', () => {
+      const expanded = grid.classList.toggle('grid-expanded');
+      items.forEach((item, i) => {
+        if (i >= limit) item.classList.toggle('grid-hidden', !expanded);
+      });
+      btn.textContent = expanded ? 'Show Less' : `Show More (${hiddenCount})`;
+      if (!expanded) {
+        grid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+
+    wrap.appendChild(btn);
+    grid.insertAdjacentElement('afterend', wrap);
+  });
+}
+
+initRevealGrids('.certificate-grid');
+initRevealGrids('.portfolio-grid');
+initRevealGrids('.gallery-grid');
 
 function showMessage(text, type) {
   formMessage.textContent = text;
@@ -115,76 +160,81 @@ window.addEventListener('load', () => {
   typeWriter();
 });
 
-// Dark mode toggle
+// Dark mode toggle (button is currently commented out in the HTML —
+// guard so a missing element doesn't crash the rest of the script)
 const darkModeToggle = document.getElementById('dark-mode-toggle');
-darkModeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-  if(document.body.classList.contains('dark-mode')){
+if (darkModeToggle) {
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    if(document.body.classList.contains('dark-mode')){
+      darkModeToggle.textContent = '☀️';
+    } else {
+      darkModeToggle.textContent = '🌙';
+    }
+  });
+
+  // Save dark mode preference
+  if(localStorage.getItem('darkMode') === 'enabled'){
+    document.body.classList.add('dark-mode');
     darkModeToggle.textContent = '☀️';
-  } else {
-    darkModeToggle.textContent = '🌙';
+  }
+}
+
+
+const certificateData = {
+  contest: [
+    'img/certificateCoding/CodingMission.webp',
+    'img/certificateCoding/CodingMission_Prize.webp',
+  ],
+  hplife: ['img/certificateCoding/HP-Life_critical thingking.webp'],
+  course: ['img/certificateCoding/revou_course.webp'],
+  course2: ['img/certificateCoding/PelatihanLatika.webp'],
+  course3: ['img/certificateCoding/CourseACodeorg.webp'],
+};
+
+function certificate(i) {
+  const images = certificateData[i];
+  showCertificates.innerHTML = '';
+
+  if (!images) {
+    showCertificates.style.display = 'none';
+    return;
+  }
+
+  const certificateImage = document.createElement('div');
+  certificateImage.classList.add('showImages');
+  certificateImage.innerHTML =
+    images.map((src) => `<img src="${src}" alt="Sertifikat" loading="lazy" />`).join('') +
+    `<button type="button" class="close-lightbox" aria-label="Tutup">&times;</button>`;
+
+  showCertificates.appendChild(certificateImage);
+  showCertificates.style.display = 'flex';
+
+  // Prevent clicks on the image/card from bubbling to the overlay's own
+  // onclick (which would immediately close it), but let the close button work.
+  certificateImage.addEventListener('click', (e) => {
+    if (e.target.closest('.close-lightbox')) {
+      certificate('0');
+    } else {
+      e.stopPropagation();
+    }
+  });
+}
+
+// Close the certificate lightbox with Esc
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && showCertificates.style.display === 'flex') {
+    certificate('0');
   }
 });
 
-// Save dark mode preference
-if(localStorage.getItem('darkMode') === 'enabled'){
-  document.body.classList.add('dark-mode');
-  darkModeToggle.textContent = '☀️';
-}
-
-
-function certificate(i) {
-  const sertifikat = document.querySelectorAll(".certificate-item");
-  const certificateImage = document.createElement("div");
-  showCertificates.innerHTML = '';
-    switch(i) {
-
-      // Compteition Certificates
-      case 'contest':
-        
-        showCertificates.style.display = "flex";
-        certificateImage.classList.add("showImages");
-        certificateImage.innerHTML = `
-        <img src="img/certificateCoding/CodingMission.webp" alt=""  height="540" width="720"/>
-        <img src="img/certificateCoding/CodingMission_Prize.webp" alt="" height="540" width="720" />
-        `
-        showCertificates.appendChild(certificateImage);
-        break;
-        // hp - life certificate
-      case 'hplife':
-        showCertificates.style.display = "flex";
-        certificateImage.classList.add("showImages");
-        certificateImage.innerHTML = `<img src="img/certificateCoding/HP-Life_critical thingking.webp" alt="" height="720" width="1280" />`
-        showCertificates.appendChild(certificateImage);
-        break;
-        // course certificates
-      case 'course':
-        showCertificates.style.display = "flex";
-        certificateImage.classList.add("showImages");
-        certificateImage.innerHTML = `<img src="img/certificateCoding/revou_course.webp" alt="" height="720" width="1280" />`
-        showCertificates.appendChild(certificateImage);
-        break;
-
-      
-      case 'course2':
-        showCertificates.style.display = "flex";
-        certificateImage.classList.add("showImages");
-        certificateImage.innerHTML = `<img src="img/certificateCoding/PelatihanLatika.webp" alt=""  height="720" width="1280" />`
-        showCertificates.appendChild(certificateImage);
-        break;
-
-      case 'course3':
-        showCertificates.style.display = "flex";
-        certificateImage.classList.add("showImages");
-        certificateImage.innerHTML = `<img src="img/certificateCoding/CourseACodeorg.webp" alt="" height="720" width="1280" />`
-        showCertificates.appendChild(certificateImage);
-        break;
-      
-
-      default:
-        showCertificates.style.display = "none";
-        showCertificates.removeChild(certificateImage);
-        break;
+// Allow opening a certificate card with Enter/Space (keyboard accessibility)
+document.querySelectorAll('.certificate-item[role="button"]').forEach((item) => {
+  item.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      item.click();
     }
-}
+  });
+});
 
