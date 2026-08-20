@@ -1474,6 +1474,7 @@ body{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
   justify-content: center;
+  justify-items: center;
   gap: 25px;
 }
 

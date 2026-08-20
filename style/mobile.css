@@ -102,7 +102,7 @@
     grid-template-columns: 1fr !important;
   }
   .certificate-grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 220px)) !important;
   }
 }
 
