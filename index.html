@@ -57,8 +57,8 @@
             untuk mencari uang maupun pekerjaan.
           </p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="#portfolio">Lihat Portfolio</a>
-            <a class="btn btn-outline" href="#contact">Kontak</a>
+            <a class="btn btn-primary" href="#portfolio">Portfolio</a>
+            <a class="btn btn-outline" href="#contact">Contact</a>
           </div>
 
           <div class="socials">
@@ -105,7 +105,7 @@
           <div class="profile-card">
             <div class="profile-photo">
               <!-- Ganti path foto profil di bawah sesuai filemu -->
-              <img src="img/myPhoto/profile3.webp" alt="Novemas Heka" width="200" height="200"/>
+              <img src="img/myPhoto/profile3.webp" alt="Novemas_Heka" width="200" height="200"/>
             </div>
             <div class="profile-badge">17 • Web Dev • Editor</div>
           </div>
@@ -192,10 +192,9 @@
     </section>
 
     <!-- CERTIFICATES -->
-     <div id="showCertificates" onclick="certificate('0')">
-      
-        
-     </div>
+     <div id="showCertificates" onclick="certificate('0')" style="border: 2px solid red"></div>
+      <!-- </div> showing certificate -->
+
     <section id="certificates" class="section certificates">
       <div class="container">
         <h2>Certificates</h2>
@@ -204,22 +203,46 @@
         </p><br>
         <div class="certificates-container">
           <div class="certificate-category">
-            <h3>Coding Certificates</h3>
+            <h3>Competition Certificate</h3>
             <div class="certificate-grid">
               
-              <div class="certificate-item" onclick="certificate('3')">
-                <img src="img/certificateCoding/CodingMission.webp" alt="Coding Certificate 3" class="certificate-img"/>
+              <div class="certificate-item" onclick="certificate('contest')">
+                <img src="img/certificateCoding/CodingMission.webp" alt="Coding Certificate 1" class="certificate-img"/>
                 <p>Surabaya Robotik & Drone Fiesta 2026</p>
               </div>
 
-              <div class="certificate-item" onclick="certificate('2')">
-                <img src="img/certificateCoding/pelatihanLatika.webp" alt="Coding Certificate 2" class="certificate-img"/>
+            </div>
+
+            <div class="certificate-category">
+            <h3>Competition Certificate</h3>
+            <div class="certificate-grid">
+              
+              <div class="certificate-item" onclick="certificate('hplife')">
+                <img src="img/certificateCoding/HP-Life_critical thingking.webp" alt="Coding Certificate 1" class="certificate-img"/>
+                <p>HP - Life <br> <span style="font-size: small;">Critical Thinking</span></p>
+              </div>
+            </div>
+            </div>
+
+            <div class="certificate-category">
+            <h3>Course Coding Certificates</h3>
+            <div class="certificate-grid">
+
+              <div class="certificate-item" onclick="certificate('course')">
+                <img src="img/certificateCoding/revou_course.webp" alt="Coding Certificate 1" class="certificate-img"/>
+                <p>Revou Course <br> <span style="font-size: small;">(HTML,CSS,JS & Kiro AI)</span></p>
+              </div>
+
+
+              <div class="certificate-item" onclick="certificate('course2')">
+                <img src="img/certificateCoding/PelatihanLatika.webp" alt="Coding Certificate 2" class="certificate-img"/>
                 <p>Pelatihan TIK <br> <span style="font-size: small;">(HTML,CSS,JS & PYTHON)</span></p>
               </div>
 
-              <div class="certificate-item" onclick="certificate('1')">
-                <img src="img/certificateCoding/CourseACodeorg.webp" alt="Coding Certificate 1" class="certificate-img"/>
+              <div class="certificate-item" onclick="certificate('course3')">
+                <img src="img/certificateCoding/CourseACodeorg.webp" alt="Coding Certificate 3" class="certificate-img"/>
                 <p>Code.org - Course A</p>
+              </div>
               </div>
 
             </div>

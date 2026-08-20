@@ -138,19 +138,9 @@ function certificate(i) {
   const certificateImage = document.createElement("div");
   showCertificates.innerHTML = '';
     switch(i) {
-      case '1':
-        showCertificates.style.display = "flex";
-        certificateImage.classList.add("showImages");
-        certificateImage.innerHTML = `<img src="img/certificateCoding/CourseACodeorg.webp" alt="" height="720" width="1280" />`
-        showCertificates.appendChild(certificateImage);
-        break;
-      case '2':
-        showCertificates.style.display = "flex";
-        certificateImage.classList.add("showImages");
-        certificateImage.innerHTML = `<img src="img/certificateCoding/PelatihanLatika.webp" alt=""  height="720" width="1280" />`
-        showCertificates.appendChild(certificateImage);
-        break;
-      case '3':
+
+      // Compteition Certificates
+      case 'contest':
         
         showCertificates.style.display = "flex";
         certificateImage.classList.add("showImages");
@@ -160,6 +150,36 @@ function certificate(i) {
         `
         showCertificates.appendChild(certificateImage);
         break;
+        // hp - life certificate
+      case 'hplife':
+        showCertificates.style.display = "flex";
+        certificateImage.classList.add("showImages");
+        certificateImage.innerHTML = `<img src="img/certificateCoding/HP-Life_critical thingking.webp" alt="" height="720" width="1280" />`
+        showCertificates.appendChild(certificateImage);
+        break;
+        // course certificates
+      case 'course':
+        showCertificates.style.display = "flex";
+        certificateImage.classList.add("showImages");
+        certificateImage.innerHTML = `<img src="img/certificateCoding/revou_course.webp" alt="" height="720" width="1280" />`
+        showCertificates.appendChild(certificateImage);
+        break;
+
+      
+      case 'course2':
+        showCertificates.style.display = "flex";
+        certificateImage.classList.add("showImages");
+        certificateImage.innerHTML = `<img src="img/certificateCoding/PelatihanLatika.webp" alt=""  height="720" width="1280" />`
+        showCertificates.appendChild(certificateImage);
+        break;
+
+      case 'course3':
+        showCertificates.style.display = "flex";
+        certificateImage.classList.add("showImages");
+        certificateImage.innerHTML = `<img src="img/certificateCoding/CourseACodeorg.webp" alt="" height="720" width="1280" />`
+        showCertificates.appendChild(certificateImage);
+        break;
+      
 
       default:
         showCertificates.style.display = "none";
