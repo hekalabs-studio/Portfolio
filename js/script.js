@@ -100,6 +100,7 @@ function initRevealGrids(selector, limit = 3) {
 }
 
 initRevealGrids('.certificate-grid');
+initRevealGrids('.certificates-container');
 initRevealGrids('.portfolio-grid');
 initRevealGrids('.gallery-grid');
 
@@ -190,6 +191,9 @@ const certificateData = {
   course: ['img/certificateCoding/revou_course.webp'],
   course2: ['img/certificateCoding/PelatihanLatika.webp'],
   course3: ['img/certificateCoding/CourseACodeorg.webp'],
+  other1: ['img/moreCertificate/PiagamWebinarPeringatanDiniBencana.webp'],
+  other2: ['img/moreCertificate/Sertifikat_antiperundungan.webp'],
+  other3: ['img/moreCertificate/sertifikatOlimIPS.webp'],
 };
 
 function certificate(i) {

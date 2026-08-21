@@ -801,6 +801,7 @@ body{
 
 /* SHOW MORE / SHOW LESS — shared by certificates, portfolio, gallery */
 .certificate-item.grid-hidden,
+.certificate-category.grid-hidden,
 .portfolio-item.grid-hidden,
 .gallery-item.grid-hidden {
   display: none !important;
