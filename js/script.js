@@ -53,7 +53,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-document.querySelectorAll('.section, .hero-left, .hero-right, .portfolio-item, .certificate-item, .gallery-item, .card, .test-card, .contact-form').forEach(el => {
+document.querySelectorAll('.section, .hero-left, .hero-right, .portfolio-item, .certificate-item, .gallery-item, .card, .test-card, .contact-form, .edu-item, .edu-stat').forEach(el => {
   observer.observe(el);
 });
 
@@ -103,6 +103,7 @@ initRevealGrids('.certificate-grid');
 initRevealGrids('.certificates-container');
 initRevealGrids('.portfolio-grid');
 initRevealGrids('.gallery-grid');
+initRevealGrids('.edu-grid');
 
 function showMessage(text, type) {
   formMessage.textContent = text;
