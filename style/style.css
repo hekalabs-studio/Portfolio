@@ -39,9 +39,11 @@ html,body{
 }
 body{
   margin:0;
+  padding-top: 70px; /* ruang untuk navbar fixed */
   font-family: 'Poppins', Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 
   color: #0d1b2a;
+  transition: background-color 0.35s ease, color 0.35s ease;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   line-height:1.5;
@@ -156,13 +158,29 @@ body{
   padding: 36px 0;
 }
 
-/* Header */
+/* Header — navbar fixed mengikuti scroll */
 .site-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
   background: transparent;
-  position: sticky;
-  top:0;
-  z-index:100;
-  backdrop-filter: blur(4px);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.site-header .container{
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.site-header.scrolled{
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 24px rgba(11, 43, 74, 0.1);
+}
+body.dark-mode .site-header.scrolled{
+  background: rgba(13, 23, 41, 0.9);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
 }
 .header-inner{
   display:flex;
@@ -383,7 +401,7 @@ body{
   animation: float 6s ease-in-out infinite;
 }
 .profile-card:hover{
-  transform: scale(1.02) translateY(-5px);
+  transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(14,110,245,0.2);
   animation-play-state: paused;
   background: rgba(255,255,255,0.9);
@@ -412,7 +430,7 @@ body{
 
 /* SECTIONS */
 .section{
-  padding:48px 0;
+  padding:80px 0;
   background:transparent;
 }
 .section h2{
@@ -897,7 +915,7 @@ body{
 }
 
 .portfolio-item:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-6px);
   box-shadow: 0 20px 60px rgba(11, 43, 74, 0.25);
   border-color: rgba(14, 110, 245, 0.3);
 }
@@ -1042,7 +1060,7 @@ body{
 }
 
 .gallery-item:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   box-shadow: 0 20px 50px rgba(14, 110, 245, 0.2);
 }
 
@@ -1055,7 +1073,7 @@ body{
 }
 
 .gallery-item:hover img {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
 /* SHOW MORE / SHOW LESS — shared by certificates, portfolio, gallery */
@@ -1134,18 +1152,17 @@ body{
 }
 
 .contact-grid {
-  display: flex;
-  grid-template-columns: 1fr 500px;
-  gap: 60px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 470px);
+  gap: 48px;
+  align-items: start;
   position: relative;
-  justify-content: center;
   z-index: 1;
 }
 
 .contact-info {
-  padding: 40px 0;
-
+  padding: 6px 0 0;
+  max-width: 560px;
 }
 
 .contact-info p {
@@ -1678,10 +1695,90 @@ body{
 .form-message.success{background:#d1fae5;color:#065f46;}
 .form-message.error{background:#fee2e2;color:#991b1b;}
 
+/* Form kontak — elemen tambahan */
+.contact-form label .req {
+  color: #ef4444;
+}
+.contact-form label small {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.contact-form select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #e6eefc;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #0d1b2a;
+  background-color: rgba(255, 255, 255, 0.8);
+  outline: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%230e6ef5" d="M6 8L0 0h12z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+.contact-form select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14,110,245,0.1);
+}
+.contact-form select.error {
+  border-color: #ef4444;
+}
+.contact-form select:required:invalid {
+  color: rgba(13, 27, 42, 0.5);
+}
+.contact-form select option {
+  color: #0d1b2a;
+}
+
+/* Penghitung kata kolom pesan */
+.word-count {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: right;
+  font-weight: 500;
+  transition: color 0.25s ease;
+}
+.word-count.ok {
+  color: #16a34a;
+}
+.word-count.low {
+  color: #ef4444;
+}
+
+/* Spinner loading pada tombol kirim */
+.spinner {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.form-actions .btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
 /* CERTIFICATES */
 .certificates {
   background: linear-gradient(135deg, rgba(244, 247, 251, 0.7), rgba(255, 255, 255, 0.8));
-  padding: 60px 0;
+  padding: 80px 0;
   position: relative;
 }
 
@@ -1804,7 +1901,7 @@ body{
 }
 
 .certificate-item:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-6px);
   box-shadow: 0 20px 60px rgba(14, 110, 245, 0.2);
   border-color: rgba(14, 110, 245, 0.3);
 }
@@ -1885,6 +1982,7 @@ body{
   .test-grid{grid-template-columns:1fr}
   .gallery-grid{grid-template-columns: repeat(2, 1fr);}
   .contact-grid{grid-template-columns:1fr; gap:30px;}
+  .contact-form{width:100%; max-width:560px; margin:0 auto;}
   .icons {
     display: flex;
     justify-content: center;
@@ -1944,4 +2042,183 @@ body{
   .social-text {
     font-size: 0.9rem;
   }
+}
+
+/* ============================================================
+   TOMBOL DARK MODE
+   ============================================================ */
+#dark-mode-toggle {
+  border: none;
+  background: rgba(14, 110, 245, 0.08);
+  color: var(--accent);
+  font-size: 1.15rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#dark-mode-toggle:hover {
+  transform: rotate(-20deg) scale(1.1);
+  background: rgba(14, 110, 245, 0.18);
+}
+
+/* ============================================================
+   DARK MODE — tema gelap menyeluruh
+   Diaktifkan lewat tombol 🌙/☀️ (tersimpan di localStorage)
+   ============================================================ */
+body.dark-mode {
+  background-color: #0a1120;
+  color: #dbe4f0;
+}
+
+/* Latar section */
+body.dark-mode .hero,
+body.dark-mode .about,
+body.dark-mode .resume,
+body.dark-mode .education,
+body.dark-mode .portfolio,
+body.dark-mode .certificates,
+body.dark-mode .gallery,
+body.dark-mode .contact {
+  background: linear-gradient(160deg, #0d1729 0%, #0a1120 100%);
+}
+
+/* Navigasi & hero */
+body.dark-mode .nav a { color: #cfe0f5; }
+body.dark-mode .nav a:hover { background: rgba(90, 167, 255, 0.12); }
+body.dark-mode .hamburger span { background: #cfe0f5; }
+body.dark-mode .nav.open { background: rgba(13, 23, 41, 0.97); }
+body.dark-mode .hero-left .hi { color: #5aa7ff; }
+body.dark-mode .hero-left .name { color: #5aa7ff; text-shadow: none; }
+body.dark-mode .hero-left .role { color: #a9c6ea; }
+body.dark-mode .hero-left .desc { color: #93a5bd; }
+body.dark-mode .socials p { color: #93a5bd; }
+body.dark-mode .socials .icons a {
+  background: rgba(23, 36, 61, 0.9);
+  color: #5aa7ff;
+  border-color: rgba(90, 167, 255, 0.15);
+}
+body.dark-mode .profile-card { background: rgba(19, 30, 52, 0.92); }
+body.dark-mode .profile-badge { background: #16233d; color: #cfe0f5; }
+
+/* Judul & teks umum */
+body.dark-mode .section h2,
+body.dark-mode .container h2 { color: #cfe0f5; }
+body.dark-mode .container h3 { color: #5aa7ff; }
+body.dark-mode .section-intro,
+body.dark-mode .section-note { color: #93a5bd; }
+
+/* About & resume */
+body.dark-mode .card { background: rgba(19, 30, 52, 0.92); border-color: rgba(90, 167, 255, 0.14); }
+body.dark-mode .card h3 { color: #5aa7ff; }
+body.dark-mode .stat { background: rgba(19, 30, 52, 0.92); border-color: rgba(90, 167, 255, 0.14); }
+body.dark-mode .stat .num { color: #5aa7ff; }
+body.dark-mode .stat .label { color: #93a5bd; }
+
+/* Education */
+body.dark-mode .edu-stat,
+body.dark-mode .edu-item,
+body.dark-mode .edu-chart-card {
+  background: rgba(19, 30, 52, 0.92);
+  border-color: rgba(90, 167, 255, 0.14);
+}
+body.dark-mode .edu-stat .num { color: #5aa7ff; }
+body.dark-mode .edu-stat .label,
+body.dark-mode .edu-sem,
+body.dark-mode .edu-chart-value,
+body.dark-mode .edu-chart-label { color: #93a5bd; }
+body.dark-mode .edu-chart-track {
+  background-color: rgba(90, 167, 255, 0.06);
+  background-image: linear-gradient(to top, rgba(90, 167, 255, 0.12) 1px, transparent 1px);
+}
+body.dark-mode .edu-bar { background: rgba(90, 167, 255, 0.16); }
+body.dark-mode .edu-subject { color: #dbe4f0; }
+body.dark-mode .edu-fill { background: linear-gradient(90deg, #2f7fe8, #7db8ff); }
+
+/* Certificates / Portfolio / Gallery */
+body.dark-mode .certificate-category,
+body.dark-mode .certificate-item,
+body.dark-mode .portfolio-item,
+body.dark-mode .gallery-item {
+  background: rgba(19, 30, 52, 0.92);
+  border-color: rgba(90, 167, 255, 0.14);
+}
+body.dark-mode .certificate-item p,
+body.dark-mode .portfolio-item p { color: #dbe4f0; }
+body.dark-mode .certificate-item:hover,
+body.dark-mode .portfolio-item:hover,
+body.dark-mode .gallery-item:hover {
+  box-shadow: 0 20px 60px rgba(47, 127, 232, 0.25);
+  border-color: rgba(90, 167, 255, 0.35);
+}
+
+/* Contact */
+body.dark-mode .contact .container h2 { color: #5aa7ff; }
+body.dark-mode .contact-info p { color: #93a5bd; }
+body.dark-mode .contact-method { background: rgba(19, 30, 52, 0.92); border-color: rgba(90, 167, 255, 0.14); }
+body.dark-mode .contact-details h4 { color: #cfe0f5; }
+body.dark-mode .contact-details a,
+body.dark-mode .contact-details span { color: #93a5bd; }
+body.dark-mode .contact-availability { background: rgba(90, 167, 255, 0.07); }
+body.dark-mode .contact-availability h4 { color: #5aa7ff; }
+body.dark-mode .contact-availability p { color: #93a5bd; }
+body.dark-mode .contact-form {
+  background: rgba(19, 30, 52, 0.95);
+  border-color: rgba(90, 167, 255, 0.16);
+}
+body.dark-mode .form-header h3 { color: #cfe0f5; }
+body.dark-mode .form-header p { color: #93a5bd; }
+body.dark-mode .contact-form label { color: #cfe0f5; }
+body.dark-mode .contact-form input,
+body.dark-mode .contact-form textarea,
+body.dark-mode .contact-form select {
+  background: rgba(10, 17, 32, 0.9);
+  border-color: rgba(90, 167, 255, 0.18);
+  color: #e2e8f0;
+}
+body.dark-mode .contact-form input::placeholder,
+body.dark-mode .contact-form textarea::placeholder { color: #64748b; }
+body.dark-mode .contact-form select option { color: #e2e8f0; background: #101a2e; }
+body.dark-mode .form-actions .btn { background: linear-gradient(135deg, #2f7fe8, #123a63); }
+
+/* Tombol show-more & lightbox */
+body.dark-mode .show-more-btn { color: #5aa7ff; border-color: #2f7fe8; }
+body.dark-mode .show-more-btn:hover { background: #2f7fe8; color: #fff; }
+body.dark-mode .close-lightbox { background: rgba(19, 30, 52, 0.95); color: #cfe0f5; }
+
+/* Footer */
+body.dark-mode .site-footer { background: linear-gradient(135deg, #0a1322, #070d18); }
+
+/* Toggle button saat mode gelap */
+body.dark-mode #dark-mode-toggle {
+  background: rgba(90, 167, 255, 0.14);
+  color: #ffd166;
+}
+
+/* Kontras teks tambahan dark mode */
+body.dark-mode { color-scheme: dark; }
+body.dark-mode .brand { color: #cfe0f5; }
+body.dark-mode .lead { color: #b8c7dc; }
+body.dark-mode .about-list { color: #93a5bd; }
+body.dark-mode .about-list strong { color: #dbe4f0; }
+body.dark-mode .section-intro strong { color: #e2e8f0; }
+body.dark-mode .round-photo { border-color: #16233d; }
+body.dark-mode .profile-photo img { border-color: #16233d; }
+body.dark-mode .cursor { color: #5aa7ff; }
+body.dark-mode .gallery-item img { filter: brightness(0.92); }
+body.dark-mode .form-message.success {
+  background: #0f2e22;
+  color: #6ee7b7;
+  border-color: #14532d;
+}
+body.dark-mode .form-message.error {
+  background: #331414;
+  color: #fca5a5;
+  border-color: #7f1d1d;
 }

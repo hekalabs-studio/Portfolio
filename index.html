@@ -7,9 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/style.css?v=20260823-2" />
   <link rel="shortcut icon" href="img/myPhoto/user.webp">
-  <link rel="stylesheet" href="style/mobile.css" media="screen and (max-width: 768px)">
+  <link rel="stylesheet" href="style/mobile.css?v=20260823-2" media="screen and (max-width: 768px)">
 
     <!-- Open Graph — preview link saat dibagikan (WhatsApp, Telegram, Discord, Facebook, dll.) -->
     <meta property="og:type" content="website">
@@ -49,7 +49,7 @@
         <a href="#portfolio" class="nav-link">Portfolio</a>
         <a href="#testimonials" class="nav-link">Testimonials</a>
         <a href="#contact" class="nav-link">Contact</a>
-        <!-- <button id="dark-mode-toggle">🌙</button> -->
+        <button id="dark-mode-toggle" aria-label="Ganti mode gelap/terang" title="Mode gelap / terang">🌙</button>
       </nav>
     </div>
   </header>
@@ -618,7 +618,57 @@
           </div>
         </div>
 
-       
+        <!-- FORM KONTAK — pesan terkirim ke hekoding@gmail.com via FormSubmit -->
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="form-header">
+            <h3>Kirim Pesan ✉️</h3>
+            <p>Pesanmu akan langsung terkirim ke emailku</p>
+          </div>
+
+          <div class="form-row">
+            <label for="cf-name">Nama <span class="req">*</span></label>
+            <input type="text" id="cf-name" name="name" placeholder="Nama kamu" autocomplete="name" required>
+          </div>
+
+          <div class="form-row">
+            <label for="cf-email">Email <span class="req">*</span></label>
+            <input type="email" id="cf-email" name="email" placeholder="email@kamu.com" autocomplete="email" required>
+          </div>
+
+          <div class="form-row">
+            <label for="cf-category">Kategori Pesan <span class="req">*</span></label>
+            <select id="cf-category" name="Kategori" required>
+              <option value="" selected disabled>— Pilih kategori pesanmu —</option>
+              <option value="Proyek Web">🌐 Proyek Web</option>
+              <option value="Edit Video">🎬 Edit Video</option>
+              <option value="Diskusi / Tanya-tanya">💬 Diskusi / Tanya-tanya</option>
+              <option value="Lainnya">✨ Lainnya</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="cf-wa">No. WhatsApp / Telegram <small>(opsional)</small></label>
+            <input type="tel" id="cf-wa" name="WhatsApp_Telegram" placeholder="08xx-xxxx-xxxx — jika ingin dibalas lewat chat" autocomplete="tel">
+          </div>
+
+          <div class="form-row">
+            <label for="cf-message">Pesan <span class="req">*</span> <small>(min. 5 kata)</small></label>
+            <textarea id="cf-message" name="message" placeholder="Ceritakan singkat proyek atau hal yang ingin kamu diskusikan..." required></textarea>
+            <span class="word-count" id="cf-wordcount">0 kata</span>
+          </div>
+
+          <!-- Pengaturan FormSubmit -->
+          <input type="hidden" name="_subject" value="📩 Pesan baru dari Portfolio!">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="form-actions">
+            <button type="submit" class="btn" id="cf-submit">Kirim Pesan 🚀</button>
+          </div>
+
+          <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+        </form>
       </div>
     </section>
   </main>
@@ -675,7 +725,7 @@
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script src="js/script.js?v=20260823-4"></script>
 
   <!-- Firebase (Analytics) -->
   <script type="module" src="js/firebase.js"></script>

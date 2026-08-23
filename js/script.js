@@ -16,19 +16,28 @@ document.querySelectorAll('.nav-link').forEach(link => {
   });
 });
 
-// Smooth scroll for in-page links
+// Smooth scroll for in-page links (offset mengikuti tinggi navbar fixed)
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', function(e){
     const target = document.querySelector(this.getAttribute('href'));
     if(target){
       e.preventDefault();
       window.scrollTo({
-        top: target.offsetTop - 60,
+        top: target.offsetTop - 80,
         behavior: 'smooth'
       });
     }
   });
 });
+
+// Navbar: tampilkan latar kaca saat halaman digulir
+const siteHeader = document.querySelector('.site-header');
+function updateHeaderState() {
+  if (!siteHeader) return;
+  siteHeader.classList.toggle('scrolled', window.scrollY > 24);
+}
+window.addEventListener('scroll', updateHeaderState, { passive: true });
+updateHeaderState();
 
 // Year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -242,4 +251,120 @@ document.querySelectorAll('.certificate-item[role="button"]').forEach((item) => 
     }
   });
 });
+
+/* ============================================================
+   FORM KONTAK — kirim pesan ke hekoding@gmail.com via FormSubmit
+   Endpoint AJAX memakai kode alias (bukan email telanjang)
+   agar aman dari spam-bot. Pesan tetap MASUK ke Gmail
+   hekoding@gmail.com.
+   ============================================================ */
+(function () {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const msgBox = document.getElementById('formMessage');
+  const submitBtn = document.getElementById('cf-submit');
+  const nameEl = document.getElementById('cf-name');
+  const emailEl = document.getElementById('cf-email');
+  const categoryEl = document.getElementById('cf-category');
+  const waEl = document.getElementById('cf-wa');
+  const messageEl = document.getElementById('cf-message');
+  const ENDPOINT = 'https://formsubmit.co/ajax/8e333788af7b2de9dd4b7dab896e5252';
+
+  function showMsg(text, type) {
+    msgBox.textContent = text;
+    msgBox.className = 'form-message ' + type;
+    msgBox.style.display = 'block';
+    clearTimeout(showMsg._t);
+    showMsg._t = setTimeout(() => { msgBox.style.display = 'none'; }, 6000);
+  }
+
+  function setFieldError(input, on) {
+    input.classList.toggle('error', on);
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Validasi sederhana
+    const nameInvalid = nameEl.value.trim().length < 2;
+    const emailInvalid = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
+    const categoryInvalid = !categoryEl.value;
+    const wordCount = messageEl.value.trim().split(/\s+/).filter(Boolean).length;
+    const messageInvalid = wordCount < 5;
+
+    setFieldError(nameEl, nameInvalid);
+    setFieldError(emailEl, emailInvalid);
+    setFieldError(categoryEl, categoryInvalid);
+    setFieldError(messageEl, messageInvalid);
+
+    // Peringatan khusus: pesan terlalu pendek
+    if (messageInvalid) {
+      showMsg(`Pesan terlalu singkat (baru ${wordCount} kata). Minimal 5 kata ya, ceritakan sedikit lebih detail! 🙏`, 'error');
+      return;
+    }
+
+    if (nameInvalid || emailInvalid || categoryInvalid) {
+      showMsg('Mohon lengkapi semua kolom bertanda * dengan benar ya! 🙏', 'error');
+      return;
+    }
+
+    // Kirim via AJAX (tanpa pindah halaman)
+    submitBtn.disabled = true;
+    const originalBtnHTML = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="spinner"></span>Mengirim...';
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: nameEl.value.trim(),
+          email: emailEl.value.trim(),
+          Kategori: categoryEl.value,
+          WhatsApp_Telegram: waEl.value.trim() || '(tidak diisi)',
+          message: messageEl.value.trim(),
+          _subject: `📩 [${categoryEl.value}] Pesan dari ${nameEl.value.trim()}`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
+
+      const data = await res.json();
+
+      if (res.ok && String(data.success) === 'true') {
+        showMsg('Pesan berhasil terkirim! Aku akan balas secepatnya 😊', 'success');
+        form.reset();
+        updateWordCount();
+      } else {
+        throw new Error(data.message || 'Gagal mengirim pesan.');
+      }
+    } catch (err) {
+      console.error(err);
+      showMsg('Maaf, pesan gagal terkirim. Coba lagi atau hubungi aku lewat Instagram ya! 🙏', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHTML;
+    }
+  });
+
+  // Hapus tanda error saat user mulai mengisi ulang
+  ['cf-name', 'cf-email', 'cf-category', 'cf-message'].forEach((id) => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => setFieldError(el, false));
+    el.addEventListener('change', () => setFieldError(el, false));
+  });
+
+  // Penghitung kata live pada kolom pesan (min. 5 kata)
+  const wordCountEl = document.getElementById('cf-wordcount');
+  function updateWordCount() {
+    if (!wordCountEl) return;
+    const words = messageEl.value.trim().split(/\s+/).filter(Boolean).length;
+    wordCountEl.textContent = words + ' kata';
+    wordCountEl.classList.toggle('ok', words >= 5);
+    wordCountEl.classList.toggle('low', words > 0 && words < 5);
+  }
+  messageEl.addEventListener('input', updateWordCount);
+  updateWordCount();
+})();
 
