@@ -197,6 +197,9 @@ const certificateData = {
     'img/certificateCoding/CodingMission.webp',
     'img/certificateCoding/CodingMission_Prize.webp',
   ],
+  contest1: [
+    'img/certificateCoding/BOM PETRA.webp',
+  ],
   hplife: ['img/certificateCoding/HP-Life_critical thingking.webp'],
   course: ['img/certificateCoding/revou_course.webp'],
   course2: ['img/certificateCoding/PelatihanLatika.webp'],
@@ -251,6 +254,89 @@ document.querySelectorAll('.certificate-item[role="button"]').forEach((item) => 
     }
   });
 });
+
+/* ============================================================
+   PORTFOLIO CAROUSEL — auto-slide + panah + titik + swipe
+   Tiap .project-card yang punya lebih dari 1 slide akan
+   berganti foto otomatis (jeda saat kursor berada di atas).
+   ============================================================ */
+(function () {
+  const AUTOPLAY_MS = 3500;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.project-card').forEach((card) => {
+    const viewport = card.querySelector('.project-slides');
+    const track = card.querySelector('.slides-track');
+    const slides = Array.from(card.querySelectorAll('.project-slide'));
+    const dotsWrap = card.querySelector('.slide-dots');
+    if (!viewport || !track || slides.length < 2) {
+      if (viewport) viewport.classList.add('single');
+      return;
+    }
+
+    let current = 0;
+    let timer = null;
+
+    // Titik indikator (dibuat otomatis sesuai jumlah slide)
+    const dots = slides.map((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Ke foto ' + (i + 1));
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goTo(i);
+        restart();
+      });
+      dotsWrap.appendChild(dot);
+      return dot;
+    });
+
+    function goTo(i) {
+      current = ((i % slides.length) + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + current * 100 + '%)';
+      dots.forEach((d, di) => d.classList.toggle('active', di === current));
+    }
+    const next = () => goTo(current + 1);
+    const prev = () => goTo(current - 1);
+
+    function start() {
+      if (reduceMotion || timer) return;
+      timer = setInterval(next, AUTOPLAY_MS);
+    }
+    function stop() {
+      clearInterval(timer);
+      timer = null;
+    }
+    const restart = () => { stop(); start(); };
+
+    const prevBtn = card.querySelector('.slide-arrow.prev');
+    const nextBtn = card.querySelector('.slide-arrow.next');
+    if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); restart(); });
+    if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); restart(); });
+
+    // Jeda auto-slide saat kursor berada di atas gambar
+    viewport.addEventListener('mouseenter', stop);
+    viewport.addEventListener('mouseleave', start);
+
+    // Swipe kiri/kanan di layar sentuh
+    let touchX = null;
+    viewport.addEventListener('touchstart', (e) => {
+      touchX = e.touches[0].clientX;
+      stop();
+    }, { passive: true });
+    viewport.addEventListener('touchend', (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
+      touchX = null;
+      start();
+    }, { passive: true });
+
+    goTo(0);
+    start();
+  });
+})();
 
 /* ============================================================
    FORM KONTAK — kirim pesan ke hekoding@gmail.com via FormSubmit

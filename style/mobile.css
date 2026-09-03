@@ -69,6 +69,18 @@
 .contact-form{padding:20px;}
 .contact-info p{font-size:1rem;}
 .portfolio-item img{height:120px;}
+
+/* --- Portfolio project card (carousel) --- */
+.project-card .project-body { padding: 12px 14px 16px; }
+.project-card .project-title { font-size: 1.02rem; }
+.project-card .project-desc { font-size: 0.84rem; }
+.project-card .project-link { margin-top: 12px; padding: 7px 16px; font-size: 0.78rem; }
+.slide-arrow { width: 30px; height: 30px; font-size: 0.95rem; }
+.slide-arrow.prev { left: 8px; }
+.slide-arrow.next { right: 8px; }
+.slide-dots { bottom: 8px; gap: 5px; }
+.slide-dot { width: 7px; height: 7px; }
+.slide-dot.active { width: 18px; }
 .close-lightbox {
   top: 14px;
   right: 14px;

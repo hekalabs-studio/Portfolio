@@ -951,6 +951,221 @@ body.dark-mode .site-header.scrolled{
   line-height: 1.4;
 }
 
+/* ============================================================
+   PORTFOLIO — PROJECT CARD + CAROUSEL FOTO (auto-slide)
+   Foto tiap project: folder img/project/project1|2|3/
+   (nama file: 1.webp, 2.webp, 3.webp, ... — lihat komentar di index.html)
+   ============================================================ */
+.project-card {
+  padding: 0;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.project-slides {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+}
+
+.slides-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.55s ease;
+  will-change: transform;
+}
+
+.project-card .project-slide {
+  flex: 0 0 100%;
+  height: 100%;
+}
+
+.project-card .project-slide img {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  margin: 0;
+  display: block;
+}
+
+/* Latar cadangan (kelihatan saat foto belum diganti / gagal dimuat) */
+.project-card:nth-child(1) .project-slide { background: linear-gradient(135deg, #d7e7ff 0%, #aecdf5 100%); }
+.project-card:nth-child(2) .project-slide { background: linear-gradient(135deg, #d9f4ec 0%, #a8e3cd 100%); }
+.project-card:nth-child(3) .project-slide { background: linear-gradient(135deg, #ebe3ff 0%, #cbb8f2 100%); }
+body.dark-mode .project-card:nth-child(1) .project-slide { background: linear-gradient(135deg, #24354f 0%, #182642 100%); }
+body.dark-mode .project-card:nth-child(2) .project-slide { background: linear-gradient(135deg, #1d3a33 0%, #14261f 100%); }
+body.dark-mode .project-card:nth-child(3) .project-slide { background: linear-gradient(135deg, #322454 0%, #201538 100%); }
+
+/* Panah kiri / kanan */
+.slide-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(11, 43, 74, 0.45);
+  color: #fff;
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.3s ease;
+  z-index: 2;
+}
+
+.slide-arrow.prev { left: 10px; }
+.slide-arrow.next { right: 10px; }
+
+.project-slides:hover .slide-arrow,
+.slide-arrow:focus-visible {
+  opacity: 1;
+}
+
+.slide-arrow:hover {
+  background: rgba(14, 110, 245, 0.85);
+}
+
+/* Layar sentuh (HP): panah selalu kelihatan */
+@media (hover: none) {
+  .slide-arrow { opacity: 1; }
+}
+
+/* Titik indikator */
+.slide-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.slide-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 1px 3px rgba(11, 43, 74, 0.4);
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.slide-dot.active {
+  width: 22px;
+  border-radius: 4px;
+  background: #fff;
+}
+
+/* Kartu yang isinya cuma 1 foto: sembunyikan panah & titik */
+.project-slides.single .slide-arrow,
+.project-slides.single .slide-dots {
+  display: none;
+}
+
+/* Isi kartu di bawah gambar */
+.project-body {
+  width: 100%;
+  padding: 16px 18px 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.project-card .project-title {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.project-card .project-title a {
+  display: inline;
+  color: var(--accent);
+  /* garis bawah titik-titik = penanda jelas bahwa judul ini link */
+  text-decoration: underline dotted;
+  text-decoration-color: rgba(14, 110, 245, 0.5);
+  text-underline-offset: 4px;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+
+.project-card .project-title a:hover {
+  color: var(--primary);
+  text-decoration-style: solid;
+  text-decoration-color: var(--primary);
+}
+
+.project-card .project-tag {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 3px 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(14, 110, 245, 0.08);
+  border: 1px solid rgba(14, 110, 245, 0.22);
+  border-radius: 999px;
+}
+
+.project-card .project-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #5a6b82;
+  line-height: 1.5;
+}
+
+body.dark-mode .project-card .project-desc {
+  color: #b8c4d6;
+}
+
+/* Tombol "Lihat Project" — sederhana & modern: ghost pill tipis,
+   saat hover terisi warna primary + panah meluncur (class .project-link saja di HTML) */
+.project-card .project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: var(--primary);
+  background: rgba(14, 110, 245, 0.06);
+  border: 1.5px solid rgba(14, 110, 245, 0.35);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+              transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card .project-link:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(14, 110, 245, 0.25);
+}
+
+.project-card .project-link .link-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.project-card .project-link:hover .link-arrow {
+  transform: translate(2px, -2px);
+}
+
 /* TESTIMONIALS */
 .testimonials {
   background: linear-gradient(135deg, rgba(14, 110, 245, 0.03), rgba(11, 43, 74, 0.04));
@@ -2187,9 +2402,20 @@ body.dark-mode .contact-form textarea::placeholder { color: #64748b; }
 body.dark-mode .contact-form select option { color: #e2e8f0; background: #101a2e; }
 body.dark-mode .form-actions .btn { background: linear-gradient(135deg, #2f7fe8, #123a63); }
 
-/* Tombol show-more & lightbox */
+/* Tombol show-more, project-link & lightbox */
 body.dark-mode .show-more-btn { color: #5aa7ff; border-color: #2f7fe8; }
 body.dark-mode .show-more-btn:hover { background: #2f7fe8; color: #fff; }
+body.dark-mode .project-card .project-link {
+  color: #5aa7ff;
+  background: rgba(47, 127, 232, 0.14);
+  border-color: rgba(90, 167, 255, 0.45);
+}
+body.dark-mode .project-card .project-link:hover {
+  background: #2f7fe8;
+  border-color: #2f7fe8;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(47, 127, 232, 0.35);
+}
 body.dark-mode .close-lightbox { background: rgba(19, 30, 52, 0.95); color: #cfe0f5; }
 
 /* Footer */
