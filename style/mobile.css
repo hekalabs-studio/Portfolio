@@ -1,6 +1,6 @@
 /* ============================================================
    MOBILE (≤768px)
-   Grid utama: 2 kolom rapi di tablet (481–768px),
+   Grid utama: 2 kolom rapi di tablet (481-768px),
    1 kolom di ponsel kecil (≤480px, diatur oleh style.css).
    ============================================================ */
 
@@ -14,11 +14,6 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
     width: 100%;
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 14px;
   }
 }
 
@@ -89,6 +84,48 @@
   font-size: 1.4rem;
 }
 
+/* --- Lightbox sertifikat: tombol & gambar di layar kecil --- */
+/* Sertifikat berformat lanskap (±1,37:1) sedangkan layar HP tegak, jadi
+   lebar selalu jadi pembatas. Lorong panah dibuat sesempit mungkin (40px)
+   dan padding vertikal dikurangi agar sertifikat tampil selebar layar.
+   Panah 38px tetap tidak menimpa gambar karena lorongnya 40px. */
+#showCertificates {
+  padding: 58px 40px 62px;
+}
+
+#showCertificates .showImages {
+  gap: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Tinggi mengikuti ruang yang tersisa; rasio asli tetap dijaga
+   sehingga sertifikat selebar mungkin tanpa terpotong. */
+#showCertificates .showImages img {
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.cert-hint {
+  display: none; /* hemat ruang: petunjuk cukup lewat tombol & Esc */
+}
+
+.cert-nav {
+  width: 34px;
+  height: 34px;
+  font-size: 0.9rem;
+}
+
+.cert-nav.cert-prev { left: 5px; }
+.cert-nav.cert-next { right: 5px; }
+
+.cert-counter {
+  bottom: 14px;
+  padding: 5px 14px;
+  font-size: 0.78rem;
+}
+
 /* --- Footer --- */
 .site-footer { padding: 40px 0 30px; }
 .footer-content { grid-template-columns: 1fr; gap: 30px; }
@@ -106,3 +143,65 @@
   text-align: center;
   padding-top: 20px;
 }
+
+/* --- Gallery showcase: carousel & lightbox di layar kecil --- */
+.gallery-groups {
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.gallery-group {
+  padding: 16px 14px 14px;
+  border-radius: 18px;
+}
+
+.gallery-group-icon {
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+}
+
+.gallery-count-badge {
+  font-size: 0.68rem;
+  padding: 4px 10px;
+}
+
+.gallery-slide { flex-basis: 78%; border-radius: 14px; }
+.gallery-track { gap: 12px; }
+
+.gallery-nav {
+  width: 36px;
+  height: 36px;
+  font-size: 0.85rem;
+}
+.gallery-nav.prev { left: 8px; }
+.gallery-nav.next { right: 8px; }
+
+.gallery-slide figcaption {
+  font-size: 0.72rem;
+  padding: 20px 10px 8px;
+}
+.gallery-meta { margin-top: 10px; }
+
+.gallery-counter {
+  font-size: 0.7rem;
+  padding: 3px 10px;
+}
+
+.show-more-btn {
+  padding: 9px 22px;
+  font-size: 0.88rem;
+}
+
+.gallery-lightbox { padding: 14px; }
+.gl-figure img { max-height: 66vh; border-radius: 12px; }
+.gl-caption { font-size: 0.85rem; }
+
+.gl-nav {
+  width: 40px;
+  height: 40px;
+  font-size: 1rem;
+}
+.gl-nav.prev { left: 10px; }
+.gl-nav.next { right: 10px; }

@@ -1,0 +1,19 @@
+# Firebase
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+*-debug.log
+
+# Dependencies (kalau nanti pakai npm)
+node_modules/
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Log & cache
+*.log
+.cache/

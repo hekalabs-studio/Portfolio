@@ -1,5 +1,5 @@
 // ============================================================
-// Firebase — Novemas Heka Portfolio
+// Firebase - Novemas Heka Portfolio
 // Dokumentasi: https://firebase.google.com/docs/web/setup
 // ============================================================
 
