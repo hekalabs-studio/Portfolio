@@ -800,10 +800,9 @@ document.querySelectorAll('.certificate-item[role="button"]').forEach((item) => 
 })();
 
 /* ============================================================
-   FORM KONTAK - kirim pesan ke hekoding@gmail.com via FormSubmit
-   Endpoint AJAX memakai kode alias (bukan email telanjang)
-   agar aman dari spam-bot. Pesan tetap MASUK ke Gmail
-   hekoding@gmail.com.
+   FORM KONTAK - Notifikasi email ke hekoding@gmail.com
+   Menggunakan API Serverless HekaLabs (Nodemailer + Gmail SMTP)
+   dengan format email gelap modern (Aether) dan lampiran file.
    ============================================================ */
 (function () {
   const form = document.getElementById('contactForm');
@@ -816,24 +815,58 @@ document.querySelectorAll('.certificate-item[role="button"]').forEach((item) => 
   const categoryEl = document.getElementById('cf-category');
   const waEl = document.getElementById('cf-wa');
   const messageEl = document.getElementById('cf-message');
-  const ENDPOINT = 'https://formsubmit.co/ajax/8e333788af7b2de9dd4b7dab896e5252';
+  const fileEl = document.getElementById('cf-attachment');
+  const fileHint = document.getElementById('cf-filehint');
+  const honeyEl = document.getElementById('cf-honey');
+
+  // Endpoint API Serverless Vercel (didukung CORS & Nodemailer)
+  const ENDPOINT = 'https://hekalabs-donation.vercel.app/api/contact';
 
   function showMsg(text, type) {
     msgBox.textContent = text;
     msgBox.className = 'form-message ' + type;
     msgBox.style.display = 'block';
     clearTimeout(showMsg._t);
-    showMsg._t = setTimeout(() => { msgBox.style.display = 'none'; }, 6000);
+    showMsg._t = setTimeout(() => { msgBox.style.display = 'none'; }, 7000);
   }
 
   function setFieldError(input, on) {
-    input.classList.toggle('error', on);
+    if (input) input.classList.toggle('error', on);
+  }
+
+  function readFileAsBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (err) => reject(err);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Live feedback saat memilih file lampiran
+  if (fileEl && fileHint) {
+    fileEl.addEventListener('change', () => {
+      if (!fileEl.files || !fileEl.files[0]) {
+        fileHint.textContent = '';
+        fileHint.className = 'file-hint';
+        return;
+      }
+      const file = fileEl.files[0];
+      const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+      if (file.size > 5 * 1024 * 1024) {
+        fileHint.textContent = `⚠️ File terlalu besar (${sizeMB} MB). Maksimal 5 MB ya!`;
+        fileHint.className = 'file-hint error';
+      } else {
+        fileHint.textContent = `📎 ${file.name} (${sizeMB} MB) siap dilampirkan`;
+        fileHint.className = 'file-hint';
+      }
+    });
   }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Validasi sederhana
+    // Validasi input
     const nameInvalid = nameEl.value.trim().length < 2;
     const emailInvalid = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
     const categoryInvalid = !categoryEl.value;
@@ -845,7 +878,7 @@ document.querySelectorAll('.certificate-item[role="button"]').forEach((item) => 
     setFieldError(categoryEl, categoryInvalid);
     setFieldError(messageEl, messageInvalid);
 
-    // Peringatan khusus: pesan terlalu pendek
+    // Peringatan khusus pesan terlalu singkat
     if (messageInvalid) {
       showMsg(`Pesan terlalu singkat (baru ${wordCount} kata). Minimal 5 kata ya, ceritakan sedikit lebih detail! 🙏`, 'error');
       return;
@@ -856,53 +889,81 @@ document.querySelectorAll('.certificate-item[role="button"]').forEach((item) => 
       return;
     }
 
-    // Kirim via AJAX (tanpa pindah halaman)
+    // Validasi file lampiran jika ada
+    let filePayload = null;
+    if (fileEl && fileEl.files && fileEl.files[0]) {
+      const file = fileEl.files[0];
+      if (file.size > 5 * 1024 * 1024) {
+        showMsg('Ukuran file lampiran melebihi batas 5 MB. Harap pilih file yang lebih kecil! 🙏', 'error');
+        return;
+      }
+      try {
+        const base64Data = await readFileAsBase64(file);
+        filePayload = {
+          fileBase64: base64Data,
+          fileName: file.name,
+          fileType: file.type
+        };
+      } catch (readErr) {
+        console.error('Gagal membaca file lampiran:', readErr);
+        showMsg('Gagal memproses file lampiran. Coba tanpa lampiran atau pilih file lain.', 'error');
+        return;
+      }
+    }
+
+    // Tombol loading
     submitBtn.disabled = true;
     const originalBtnHTML = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<span class="spinner"></span>Mengirim...';
+    submitBtn.innerHTML = '<span class="spinner"></span>Mengirim pesan...';
+
+    const payload = {
+      name: nameEl.value.trim(),
+      email: emailEl.value.trim(),
+      category: categoryEl.value,
+      whatsapp: waEl.value.trim(),
+      message: messageEl.value.trim(),
+      website_hp: honeyEl ? honeyEl.value : '',
+      ...(filePayload || {})
+    };
 
     try {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          name: nameEl.value.trim(),
-          email: emailEl.value.trim(),
-          Kategori: categoryEl.value,
-          WhatsApp_Telegram: waEl.value.trim() || '(tidak diisi)',
-          message: messageEl.value.trim(),
-          _subject: `📩 [${categoryEl.value}] Pesan dari ${nameEl.value.trim()}`,
-          _template: 'table',
-          _captcha: 'false'
-        })
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
-      if (res.ok && String(data.success) === 'true') {
-        showMsg('Pesan berhasil terkirim! Aku akan balas secepatnya 😊', 'success');
+      if (res.ok && data.success) {
+        showMsg('Pesan berhasil terkirim ke hekoding@gmail.com! Aku akan balas secepatnya 😊', 'success');
         form.reset();
         updateWordCount();
+        if (fileHint) fileHint.textContent = '';
       } else {
-        throw new Error(data.message || 'Gagal mengirim pesan.');
+        throw new Error(data.error || data.message || 'Gagal mengirim pesan.');
       }
     } catch (err) {
       console.error(err);
-      showMsg('Maaf, pesan gagal terkirim. Coba lagi atau hubungi aku lewat Instagram ya! 🙏', 'error');
+      showMsg(`Maaf, pesan gagal terkirim (${err.message || 'kendala jaringan'}). Hubungi aku lewat Instagram atau email langsung ya! 🙏`, 'error');
     } finally {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnHTML;
     }
   });
 
-  // Hapus tanda error saat user mulai mengisi ulang
+  // Hapus tanda error saat user mulai mengetik ulang
   ['cf-name', 'cf-email', 'cf-category', 'cf-message'].forEach((id) => {
     const el = document.getElementById(id);
+    if (!el) return;
     el.addEventListener('input', () => setFieldError(el, false));
     el.addEventListener('change', () => setFieldError(el, false));
   });
 
-  // Penghitung kata live pada kolom pesan (min. 5 kata)
+  // Penghitung kata live pada textarea
   const wordCountEl = document.getElementById('cf-wordcount');
   function updateWordCount() {
     if (!wordCountEl) return;

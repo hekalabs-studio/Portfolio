@@ -2569,6 +2569,43 @@ body.dark-mode .project-card .project-desc {
   color: #ef4444;
 }
 
+/* File attachment input */
+.contact-form input[type="file"] {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.contact-form input[type="file"]::file-selector-button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 12px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+.contact-form input[type="file"]::file-selector-button:hover {
+  opacity: 0.9;
+}
+.file-hint {
+  display: block;
+  font-size: 0.78rem;
+  margin-top: -10px;
+  margin-bottom: 12px;
+  color: var(--muted);
+}
+.file-hint.error {
+  color: #ef4444;
+}
+body.dark-mode .contact-form input[type="file"]::file-selector-button {
+  background: var(--blue-strong);
+}
+
 /* Spinner loading pada tombol kirim */
 .spinner {
   display: inline-block;

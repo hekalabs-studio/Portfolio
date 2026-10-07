@@ -899,7 +899,7 @@
           </div>
         </div>
 
-        <!-- FORM KONTAK: pesan terkirim ke hekoding@gmail.com via FormSubmit -->
+        <!-- FORM KONTAK: notifikasi pesan terkirim ke hekoding@gmail.com -->
         <form id="contactForm" class="contact-form" novalidate>
           <div class="form-header">
             <h3>Kirim Pesan ✉️</h3>
@@ -918,7 +918,7 @@
 
           <div class="form-row">
             <label for="cf-category">Kategori Pesan <span class="req">*</span></label>
-            <select id="cf-category" name="Kategori" required>
+            <select id="cf-category" name="category" required>
               <option value="" selected disabled>Pilih kategori pesanmu</option>
               <option value="Proyek Web">🌐 Proyek Web</option>
               <option value="Edit Video">🎬 Edit Video</option>
@@ -929,7 +929,7 @@
 
           <div class="form-row">
             <label for="cf-wa">No. WhatsApp / Telegram <small>(opsional)</small></label>
-            <input type="tel" id="cf-wa" name="WhatsApp_Telegram" placeholder="08xx-xxxx-xxxx, jika ingin dibalas lewat chat" autocomplete="tel">
+            <input type="tel" id="cf-wa" name="whatsapp" placeholder="08xx-xxxx-xxxx, jika ingin dibalas lewat chat" autocomplete="tel">
           </div>
 
           <div class="form-row">
@@ -938,11 +938,14 @@
             <span class="word-count" id="cf-wordcount">0 kata</span>
           </div>
 
-          <!-- Pengaturan FormSubmit -->
-          <input type="hidden" name="_subject" value="📩 Pesan baru dari Portfolio!">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="form-row">
+            <label for="cf-attachment">Lampiran File / Dokumen <small>(opsional: gambar/brief, maks. 5MB)</small></label>
+            <input type="file" id="cf-attachment" name="attachment" accept="image/jpeg,image/png,image/webp,application/pdf">
+            <span class="file-hint" id="cf-filehint"></span>
+          </div>
+
+          <!-- Anti-spam honeypot (tidak terlihat oleh manusia) -->
+          <input type="text" name="website_hp" id="cf-honey" style="display:none" tabindex="-1" autocomplete="off">
 
           <div class="form-actions">
             <button type="submit" class="btn" id="cf-submit">Kirim Pesan 🚀</button>
